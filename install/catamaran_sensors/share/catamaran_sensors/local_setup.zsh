@@ -1,0 +1,1 @@
+/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/ament_cmake_environment_hooks/local_setup.zsh

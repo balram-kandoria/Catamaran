@@ -1,0 +1,23 @@
+[0.035s] Invoking command in '/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors -- -j16 -l16
+[0.055s] Invoked command in '/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors -- -j16 -l16
+[0.087s] Invoking command in '/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors
+[0.095s] -- Install configuration: ""
+[0.096s] -- Execute custom install script
+[0.096s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/launch/sensors.launch.py
+[0.097s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/launch/subcriber.launch.py
+[0.097s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/ament_index/resource_index/package_run_dependencies/catamaran_sensors
+[0.097s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/ament_index/resource_index/parent_prefix_path/catamaran_sensors
+[0.097s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/environment/ament_prefix_path.sh
+[0.097s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/environment/ament_prefix_path.dsv
+[0.097s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/environment/path.sh
+[0.098s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/environment/path.dsv
+[0.098s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/local_setup.bash
+[0.098s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/local_setup.sh
+[0.098s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/local_setup.zsh
+[0.098s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/local_setup.dsv
+[0.098s] -- Symlinking: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/package.dsv
+[0.105s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/ament_index/resource_index/packages/catamaran_sensors
+[0.105s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/cmake/catamaran_sensorsConfig.cmake
+[0.105s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/cmake/catamaran_sensorsConfig-version.cmake
+[0.106s] -- Up-to-date symlink: /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/package.xml
+[0.108s] Invoked command in '/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors
