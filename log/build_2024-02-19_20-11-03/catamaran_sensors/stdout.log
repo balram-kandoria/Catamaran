@@ -1,0 +1,16 @@
+running develop
+running egg_info
+writing catamaran_sensors.egg-info/PKG-INFO
+writing dependency_links to catamaran_sensors.egg-info/dependency_links.txt
+writing entry points to catamaran_sensors.egg-info/entry_points.txt
+writing requirements to catamaran_sensors.egg-info/requires.txt
+writing top-level names to catamaran_sensors.egg-info/top_level.txt
+reading manifest file 'catamaran_sensors.egg-info/SOURCES.txt'
+writing manifest file 'catamaran_sensors.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/lib/python3.10/site-packages/catamaran-sensors.egg-link (link to .)
+Installing sensor_subcriber script to /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/lib/catamaran_sensors
+
+Installed /home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors
+running install_data
+creating /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/share/catamaran_sensors/sensor_pipeline

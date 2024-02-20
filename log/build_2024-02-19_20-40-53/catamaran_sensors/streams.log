@@ -1,0 +1,21 @@
+[0.451s] Invoking command in '/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors': PYTHONPATH=/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/prefix_override:/home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/build --no-deps install_data
+[0.613s] running develop
+[0.613s] /usr/lib/python3/dist-packages/setuptools/command/easy_install.py:158: EasyInstallDeprecationWarning: easy_install command is deprecated. Use build and pip and other standards-based tools.
+[0.613s]   warnings.warn(
+[0.614s] /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[0.614s]   warnings.warn(
+[0.698s] running egg_info
+[0.698s] writing catamaran_sensors.egg-info/PKG-INFO
+[0.698s] writing dependency_links to catamaran_sensors.egg-info/dependency_links.txt
+[0.698s] writing entry points to catamaran_sensors.egg-info/entry_points.txt
+[0.698s] writing requirements to catamaran_sensors.egg-info/requires.txt
+[0.698s] writing top-level names to catamaran_sensors.egg-info/top_level.txt
+[0.700s] reading manifest file 'catamaran_sensors.egg-info/SOURCES.txt'
+[0.700s] writing manifest file 'catamaran_sensors.egg-info/SOURCES.txt'
+[0.701s] running build_ext
+[0.701s] Creating /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/lib/python3.10/site-packages/catamaran-sensors.egg-link (link to .)
+[0.701s] Installing raw_imu script to /home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/lib/catamaran_sensors
+[0.702s] 
+[0.702s] Installed /home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors
+[0.702s] running install_data
+[0.721s] Invoked command in '/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors' returned '0': PYTHONPATH=/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/prefix_override:/home/saturn/Desktop/Dev/catamaran/install/catamaran_sensors/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --editable --build-directory /home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/build --no-deps install_data

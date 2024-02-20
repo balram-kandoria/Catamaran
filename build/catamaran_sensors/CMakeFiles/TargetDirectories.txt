@@ -1,9 +1,0 @@
-/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/CMakeFiles/uninstall.dir
-/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/CMakeFiles/catamaran_sensors_uninstall.dir
-/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/CMakeFiles/test.dir
-/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/CMakeFiles/edit_cache.dir
-/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/CMakeFiles/rebuild_cache.dir
-/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/CMakeFiles/list_install_components.dir
-/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/CMakeFiles/install.dir
-/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/CMakeFiles/install/local.dir
-/home/saturn/Desktop/Dev/catamaran/build/catamaran_sensors/CMakeFiles/install/strip.dir

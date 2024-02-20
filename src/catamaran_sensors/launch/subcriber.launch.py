@@ -8,7 +8,7 @@ def generate_launch_description():
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=[
-            '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
+            "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
             '/world/waves/model/spherical_buoy/link/imu_link/sensor/imu_sensor/imu@sensor_msgs/msg/Imu[gz.msgs.IMU'
             ],
         output='screen',
@@ -19,3 +19,5 @@ def generate_launch_description():
     return LaunchDescription([
         bridge
     ])
+
+    

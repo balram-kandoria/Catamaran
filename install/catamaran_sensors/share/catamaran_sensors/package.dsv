@@ -1,8 +1,9 @@
-source;share/catamaran_sensors/hook/cmake_prefix_path.ps1
-source;share/catamaran_sensors/hook/cmake_prefix_path.dsv
-source;share/catamaran_sensors/hook/cmake_prefix_path.sh
-source;share/catamaran_sensors/local_setup.bash
-source;share/catamaran_sensors/local_setup.dsv
-source;share/catamaran_sensors/local_setup.ps1
-source;share/catamaran_sensors/local_setup.sh
-source;share/catamaran_sensors/local_setup.zsh
+source;share/catamaran_sensors/hook/pythonpath.ps1
+source;share/catamaran_sensors/hook/pythonpath.dsv
+source;share/catamaran_sensors/hook/pythonpath.sh
+source;share/catamaran_sensors/hook/ament_prefix_path.ps1
+source;share/catamaran_sensors/hook/ament_prefix_path.dsv
+source;share/catamaran_sensors/hook/ament_prefix_path.sh
+source;../../build/catamaran_sensors/share/catamaran_sensors/hook/pythonpath_develop.ps1
+source;../../build/catamaran_sensors/share/catamaran_sensors/hook/pythonpath_develop.dsv
+source;../../build/catamaran_sensors/share/catamaran_sensors/hook/pythonpath_develop.sh
