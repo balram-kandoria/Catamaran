@@ -1,3 +1,0 @@
-[console_scripts]
-raw_imu = sensor_pipeline.send_imu:main
-

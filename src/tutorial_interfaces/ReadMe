@@ -1,0 +1,4 @@
+# Check if added types appear
+
+ros2 interface show ${PackageName}/path/to/files
+
