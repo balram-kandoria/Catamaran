@@ -1,5 +1,9 @@
 # Autonomous Catamaran Project
 
+## Catamaran
+
+The hull shape references the [Pauline](https://drive.google.com/file/d/0B32-8ZWvIt6URWtMSzY5eFM0LTg/view?resourcekey=0-qiQcJYNRlNALtBKUkP0fuw), a centerboard sloop sailing yacht. The plans for the Pauline were found on [Ship Modell](http://www.shipmodell.com/index_files/0PLAN2B.html#5S)
+
 ## ASV Wave Simulation
 
 See [ASV Wave Simulation](https://github.com/srmainwaring/asv_wave_sim) for more information about wave mechanics. 
