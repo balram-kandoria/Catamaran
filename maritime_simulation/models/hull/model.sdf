@@ -1,0 +1,247 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='hull'>
+    <enable_wind>true</enable_wind>
+
+    <link name="base_link">
+      <visual name="visual">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry>
+          
+          <mesh>
+            <uri>model://maritime_simulation/models/hull/meshes/Hull.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <!-- Teal material -->
+          <ambient>0 0.5 0.5 1</ambient>
+          <diffuse>0 0.7 0.7 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
+
+      </visual>
+
+      <collision name="main_hull">
+        <geometry>
+          <box>
+            <size>3 1.5 0.5</size>
+          </box>
+        </geometry>
+      </collision>
+
+      
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>250</mass>
+        <inertia>
+          <ixx>120</ixx>
+          <ixy>0</ixy>
+          <iyy>393</iyy>
+          <iyz>0</iyz>
+          <izz>446</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="fore_fin">
+
+      <visual name="visual">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry>
+          
+          <mesh>
+            <uri>model://maritime_simulation/models/hull/meshes/Fore_Fin.stl</uri>
+          </mesh>
+        </geometry>
+
+        <material>
+          <!-- Black material -->
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
+
+
+      </visual>
+
+      <collision name="fore_fin">
+        <pose>0.5 0 -1.20 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.5 0.25 1.5</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass>15</mass>
+        <inertia>
+          <ixx>0.88924</ixx>
+          <ixy>0</ixy>
+          <iyy>0.911125</iyy>
+          <iyz>0</iyz>
+          <izz>0.078125</izz>
+        </inertia>
+      </inertial>
+    </link>
+    <joint name="fore_fin_joint" type="fixed">
+      <!-- Joint parameters go here -->
+      <parent>base_link</parent>
+      <child>fore_fin</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+      <pose>0 0 0 0 0 0</pose>
+    </joint>
+
+    <link name="aft_fin">
+
+      <visual name="visual">
+        <pose>0 0 0 1.5708 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://maritime_simulation/models/hull/meshes/Aft_Fin.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <!-- Black material -->
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
+      </visual>
+      <collision name="aft_fin">
+        <pose>-2.5 0 -0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.10 0.10 0.7</size>
+          </box>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass>15</mass>
+        <inertia>
+          <ixx>0.88924</ixx>
+          <ixy>0</ixy>
+          <iyy>0.911125</iyy>
+          <iyz>0</iyz>
+          <izz>0.078125</izz>
+        </inertia>
+      </inertial>
+    </link>
+    
+    <joint name="aft_fin_joint" type="fixed">
+      <!-- Joint parameters go here -->
+      <parent>base_link</parent>
+      <child>aft_fin</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+      <pose>0 0 0 0 0 0</pose>
+    </joint>
+
+
+    <!--
+      Dimensions for a standard aft-thruster H-configuration based on the robot description
+      from the osrf/vrx project.
+      https://github.com/osrf/vrx/wiki/tutorials-PropulsionConfiguration
+
+      Links
+      https://github.com/osrf/vrx/blob/master/wamv_gazebo/urdf/thruster_layouts/wamv_aft_thrusters.xacro
+
+      Joints
+      https://github.com/osrf/vrx/blob/master/wamv_description/urdf/thrusters/engine.xacro 
+    
+    -->
+
+    <!-- Sensors -->
+    <link name="imu_link">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.15</mass>
+        <inertia>
+          <ixx>0.00001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00002</iyy>
+          <iyz>0</iyz>
+          <izz>0.00002</izz>
+        </inertia>
+      </inertial>
+      <sensor name="imu_sensor" type="imu">
+        <pose>0 0 0 3.141593 0 0</pose>
+        <always_on>1</always_on>
+        <update_rate>1000.0</update_rate>
+      </sensor>
+    </link>
+    <joint name="imu_joint" type="revolute">
+      <child>imu_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <damping>1.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+
+
+    <!-- Hydrodynamics plugin -->
+    <plugin
+        filename="gz-waves1-hydrodynamics-system"
+        name="gz::sim::systems::Hydrodynamics">
+        
+        <enable>hull::base_link</enable>
+
+        <!-- <enable>wam-v::left_engine_link</enable>
+        <enable>wam-v::left_propeller_link</enable>
+        <enable>wam-v::right_engine_link</enable>
+        <enable>wam-v::right_propeller_link</enable> -->
+
+        <hydrodynamics>
+          <damping_on>1</damping_on>
+          <viscous_drag_on>1</viscous_drag_on>
+          <pressure_drag_on>1</pressure_drag_on>
+        
+          <!-- Linear and Angular Damping -->
+          <cDampL1>1.0E-6</cDampL1>
+          <cDampL2>1.0E-6</cDampL2>
+          <cDampR1>1.0E-6</cDampR1>
+          <cDampR2>1.0E-6</cDampR2>
+        
+          <!-- 'Pressure' Drag -->
+          <cPDrag1>1.0E+2</cPDrag1>
+          <cPDrag2>1.0E+2</cPDrag2>
+          <fPDrag>0.4</fPDrag>
+          <cSDrag1>1.0E+2</cSDrag1>
+          <cSDrag2>1.0E+2</cSDrag2>
+          <fSDrag>0.4</fSDrag>
+          <vRDrag>1.0</vRDrag>
+        </hydrodynamics>
+    </plugin>
+
+    <!-- ArduPilot plugin -->
+    <plugin name="ArduPilotPlugin" filename="ArduPilotPlugin">
+      <fdm_addr>127.0.0.1</fdm_addr>
+      <fdm_port_in>9002</fdm_port_in>
+      <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
+      <lock_step>1</lock_step>
+      <modelXYZToAirplaneXForwardZDown>0 0 0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
+      <gazeboXYZToNED>0 0 0 3.141593 0 1.57079632</gazeboXYZToNED>
+      <imuName>imu_sensor</imuName>
+    </plugin>
+
+
+
+  </model>
+</sdf>
