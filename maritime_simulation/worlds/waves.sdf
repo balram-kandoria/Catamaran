@@ -19,6 +19,7 @@
             name="gz::sim::systems::Imu">
     </plugin>
 
+
     <scene>
       <ambient>1.0 1.0 1.0</ambient>
       <background>0.8 0.8 0.8</background>

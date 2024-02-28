@@ -7,7 +7,6 @@
       <visual name="visual">
         <pose>0 0 0 1.5708 0 0</pose>
         <geometry>
-          
           <mesh>
             <uri>model://maritime_simulation/models/hull/meshes/Hull.stl</uri>
           </mesh>
@@ -19,9 +18,7 @@
           <specular>0 0 0 0</specular>
           <emissive>0 0 0 1</emissive>
         </material>
-
       </visual>
-
       <collision name="main_hull">
         <geometry>
           <box>
@@ -29,12 +26,9 @@
           </box>
         </geometry>
       </collision>
-
-      
-
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>250</mass>
+        <mass>2.26</mass>
         <inertia>
           <ixx>120</ixx>
           <ixy>0</ixy>
@@ -46,16 +40,13 @@
     </link>
 
     <link name="fore_fin">
-
       <visual name="visual">
         <pose>0 0 0 1.5708 0 0</pose>
         <geometry>
-          
           <mesh>
             <uri>model://maritime_simulation/models/hull/meshes/Fore_Fin.stl</uri>
           </mesh>
         </geometry>
-
         <material>
           <!-- Black material -->
           <ambient>0 0 0 1</ambient>
@@ -63,10 +54,7 @@
           <specular>0 0 0 0</specular>
           <emissive>0 0 0 1</emissive>
         </material>
-
-
       </visual>
-
       <collision name="fore_fin">
         <pose>0.5 0 -1.20 0 0 0</pose>
         <geometry>
@@ -75,9 +63,9 @@
           </box>
         </geometry>
       </collision>
-
       <inertial>
-        <mass>15</mass>
+        <pose>0.5 0 -1 0 0 0</pose>
+        <mass>36.8</mass>
         <inertia>
           <ixx>0.88924</ixx>
           <ixy>0</ixy>
@@ -123,7 +111,8 @@
         </geometry>
       </collision>
       <inertial>
-        <mass>15</mass>
+        <pose>-2.5 0 -0.5 0 0 0</pose>
+        <mass>2.26</mass>
         <inertia>
           <ixx>0.88924</ixx>
           <ixy>0</ixy>
@@ -195,6 +184,74 @@
       </axis>
     </joint>
 
+
+
+    <link name="laser_frame">
+      <visual name="visual">
+        <pose>1 0 0.1 0 0 0</pose>
+        <geometry>
+              <cylinder>
+                <radius>0.1</radius>
+                <length>0.04</length>
+              </cylinder>
+        </geometry>
+        <material>
+          <!-- Red material -->
+          <ambient>0.5 0 0 1</ambient>
+          <diffuse>0.7 0 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0.5 0 0 1</emissive>
+        </material>
+
+      </visual>
+      <collision name="lidar1">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>0.04</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.00001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00002</iyy>
+          <iyz>0</iyz>
+          <izz>0.00002</izz>
+        </inertia>
+      </inertial>
+
+      <sensor name="gpu_lidar" type="gpu_lidar">
+        <pose> 0 0 0 0 0 0 </pose>
+        <topic>/lidar/forward/left</topic>
+        <visualize>true</visualize>
+        <update_rate>10</update_rate>
+        <ray> 
+          <scan>
+            <horizontal>
+                <samples>360</samples>
+                <min_angle>-3.14</min_angle>
+                <max_angle>3.14</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+              <min>0.3</min>
+              <max>12</max>
+          </range>      
+        </ray>
+        <always_on>true</always_on>
+      </sensor>
+    </link>
+
+    <joint name="laser_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>laser_frame</child>
+      <origin xyz="0.1 0 0.175" rpy="0 0 0"/>
+    </joint>
 
     <!-- Hydrodynamics plugin -->
     <plugin
