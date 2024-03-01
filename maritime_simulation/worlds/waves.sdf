@@ -36,7 +36,7 @@
 
     <include>
       <pose>0 0 0 0 0 0</pose>
-      <uri>model://home/saturn/Desktop/Dev/catamaran/maritime_simulation/waves/regular_waves</uri>
+      <uri>model://home/saturn/Desktop/Dev/catamaran/maritime_simulation/waves/waves</uri>
     </include>
 
     <!-- ENU axes -->
@@ -98,6 +98,10 @@
       <uri>model://maritime_simulation/models/hull</uri>
     </include>
 
+    <include>
+      <pose>0 5 0 0 0 0</pose>
+      <uri>model://maritime_simulation/models/wam-v</uri>
+    </include>
 
 
   </world>

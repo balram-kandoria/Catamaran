@@ -3,6 +3,10 @@
   <model name='hull'>
     <enable_wind>true</enable_wind>
 
+    <plugin filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+    </plugin>
+
     <link name="base_link">
       <visual name="visual">
         <pose>0 0 0 1.5708 0 0</pose>
@@ -185,8 +189,11 @@
     </joint>
 
 
+    <frame name="lidar_frame" attached_to='left_lidar'>
+      <pose>0.8 0 0.5 0 0 0</pose>
+    </frame>
 
-    <link name="laser_frame">
+    <link name="left_lidar">
       <visual name="visual">
         <pose>1 0 0.1 0 0 0</pose>
         <geometry>
@@ -204,7 +211,7 @@
         </material>
 
       </visual>
-      <collision name="lidar1">
+      <collision name="left_lidar">
         <geometry>
           <cylinder>
             <radius>0.05</radius>
@@ -225,10 +232,10 @@
         </inertia>
       </inertial>
 
-      <sensor name="gpu_lidar" type="gpu_lidar">
+      <sensor name="gpu_lidar" type="gpu_ray">
         <pose> 0 0 0 0 0 0 </pose>
-        <topic>/lidar/forward/left</topic>
-        <visualize>true</visualize>
+        <topic>/lidar/bow/port</topic>
+        <visualize>false</visualize>
         <update_rate>10</update_rate>
         <ray> 
           <scan>
@@ -237,23 +244,41 @@
                 <min_angle>-3.14</min_angle>
                 <max_angle>3.14</max_angle>
             </horizontal>
+            <vertical>
+                <samples>1</samples>
+                <resolution>0.01</resolution>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+            </vertical>
           </scan>
           <range>
               <min>0.3</min>
               <max>12</max>
-          </range>      
+          </range>  
+          <noise>
+            <type>gaussian</type>
+            <!-- Noise parameters based on published spec for Hokuyo laser
+                achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+                stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+                reading. -->
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>    
         </ray>
-        <always_on>true</always_on>
+        <always_on>1</always_on>
       </sensor>
     </link>
 
     <joint name="laser_joint" type="fixed">
       <parent>base_link</parent>
-      <child>laser_frame</child>
+      <child>left_lidar</child>
       <origin xyz="0.1 0 0.175" rpy="0 0 0"/>
     </joint>
 
+
+
     <!-- Hydrodynamics plugin -->
+
     <plugin
         filename="gz-waves1-hydrodynamics-system"
         name="gz::sim::systems::Hydrodynamics">
@@ -299,6 +324,6 @@
     </plugin>
 
 
-
+  
   </model>
 </sdf>
