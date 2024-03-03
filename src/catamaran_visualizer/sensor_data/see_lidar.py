@@ -54,7 +54,7 @@ class lidarVisualizer(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = lidarVisualizer(nodeName="lidar_publisher", subTopic="/lidar/bow/port")
+    node = lidarVisualizer(nodeName="lidar_publisher", subTopic="/lidar/wam_v")
     rclpy.spin(node)
     rclpy.shutdown()
 

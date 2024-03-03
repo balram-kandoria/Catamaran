@@ -69,3 +69,6 @@ $HOME/catmaran/src/asv_wave_sim/gz-waves/src/gui/plugins/waves_control/build
 ```bash
 LIBGL_ALWAYS_SOFTWARE=1 gz sim waves.sdf
 ```
+
+
+

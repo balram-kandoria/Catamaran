@@ -93,10 +93,6 @@
 
 
 
-    <include>
-      <pose>5 0 0 0 0 0</pose>
-      <uri>model://maritime_simulation/models/hull</uri>
-    </include>
 
     <include>
       <pose>0 5 0 0 0 0</pose>

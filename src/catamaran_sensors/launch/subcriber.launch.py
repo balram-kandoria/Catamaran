@@ -12,7 +12,7 @@ def generate_launch_description():
         arguments=[
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
             '/world/waves/model/spherical_buoy/link/imu_link/sensor/imu_sensor/imu@sensor_msgs/msg/Imu[gz.msgs.IMU',
-            '/lidar/bow/port@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '/lidar/wam_v@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
             '/world/waves/model/hull/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model'
 
             ],

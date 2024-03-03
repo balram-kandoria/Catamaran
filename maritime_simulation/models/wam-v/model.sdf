@@ -29,6 +29,42 @@
           <izz>446</izz>
         </inertia>
       </inertial>
+
+      <sensor name="gpu_lidar" type="gpu_ray">
+        <pose> 0 0 1.5 0 0 0 </pose>
+        <topic>/lidar/wam_v</topic>
+        <visualize>false</visualize>
+        <update_rate>10</update_rate>
+        <ray> 
+          <scan>
+            <horizontal>
+                <samples>360</samples>
+                <min_angle>-3.14</min_angle>
+                <max_angle>3.14</max_angle>
+            </horizontal>
+            <vertical>
+                <samples>1</samples>
+                <resolution>0.01</resolution>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+            </vertical>
+          </scan>
+          <range>
+              <min>0.3</min>
+              <max>12</max>
+          </range>  
+          <noise>
+            <type>gaussian</type>
+            <!-- Noise parameters based on published spec for Hokuyo laser
+                achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+                stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+                reading. -->
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>    
+        </ray>
+        <always_on>1</always_on>
+      </sensor>
     </link>
 
     <!--
@@ -235,6 +271,54 @@
       </axis>
     </joint>
 
+    <link name="lidar">
+      <visual name="visual">
+        <pose>0 0 1.5 0 0 0</pose>
+        <geometry>
+              <cylinder>
+                <radius>0.1</radius>
+                <length>0.04</length>
+              </cylinder>
+        </geometry>
+        <material>
+          <!-- Red material -->
+          <ambient>0.5 0 0 1</ambient>
+          <diffuse>0.7 0 0 1</diffuse>
+          <specular>0 0 0 0</specular>
+          <emissive>0.5 0 0 1</emissive>
+        </material>
+
+      </visual>
+      <collision name="lidar">
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>
+            <length>0.04</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.00001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00002</iyy>
+          <iyz>0</iyz>
+          <izz>0.00002</izz>
+        </inertia>
+      </inertial>
+
+     
+    </link>
+
+    <joint name="lidar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>lidar</child>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
     <!-- Sensors -->
     <link name="imu_link">
       <inertial>
@@ -283,6 +367,23 @@
     <plugin filename="gz-sim-apply-joint-force-system"
       name="gz::sim::systems::ApplyJointForce">
       <joint_name>right_engine_joint</joint_name>
+    </plugin>
+
+    <!-- Joint Position Controller plugin -->
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>right_engine_joint</joint_name>
+      <use_velocity_commands>true</use_velocity_commands>
+      <topic>/wamv/right/thruster/joint/cmd_pos</topic>
+    </plugin>
+
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>left_engine_joint</joint_name>
+      <use_velocity_commands>true</use_velocity_commands>
+      <topic>/wamv/left/thruster/joint/cmd_pos</topic>
     </plugin>
 
     <!-- Thruster plugins -->
@@ -426,6 +527,8 @@
         <cmd_topic>/model/wam-v/joint/right_propeller_joint/cmd_thrust</cmd_topic>
       </control>
     </plugin>
+
+ 
 
   </model>
 </sdf>
