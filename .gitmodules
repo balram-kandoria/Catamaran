@@ -3,4 +3,4 @@
 	url = https://github.com/srmainwaring/asv_wave_sim.git
 [submodule "src/ardupilot_gazebo"]
 	path = src/ardupilot_gazebo
-	url = https://github.com/ArduPilot/ardupilot_gazebo
+	url = https://github.com/ArduPilot/ardupilot_gazebo.git
