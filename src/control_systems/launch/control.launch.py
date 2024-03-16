@@ -2,6 +2,9 @@ import os
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
+# Launch Plots
+os.system('/usr/bin/python3 /home/saturn/Desktop/Dev/catamaran/src/control_systems/waypoints/generate_xml.py')
+
 def generate_launch_description():
     
     # Rudder Bridge

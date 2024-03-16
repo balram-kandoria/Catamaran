@@ -91,8 +91,31 @@
       </link>
     </model>
 
+    <model name="Waypoint">
+      <static>1</static>
+      <link name="link">
+        <visual name="b">
+          <cast_shadows>0</cast_shadows>
+          <pose>20 0 5.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.1 0.1 10</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.5 0 0.5 1</ambient>
+            <diffuse>0.5 0 0.5 1</diffuse>
+            <emissive>0.5 0 0.5 1</emissive>
+            <specular>0.6 0.6 0.6 1</specular>
+          </material>
 
+        </visual>
+      </link>
+    </model>
 
+    <include>
+      <uri>model://src/control_systems/waypoints/model</uri>
+    </include>
 
     <include>
       <pose>0 5 0 0 0 0</pose>

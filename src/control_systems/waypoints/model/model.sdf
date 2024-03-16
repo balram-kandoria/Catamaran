@@ -1,0 +1,91 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name="Waypoints">
+    <static>1</static>
+    <link name="Waypoint 1">
+    <visual name="b">
+      <cast_shadows>0</cast_shadows>
+      <pose>20  0 5.1 0 0 0</pose>
+      <geometry>
+      <box>
+        <size>0.1 0.1 10</size>
+      </box>
+      </geometry>
+      <material>
+      <ambient>0.5 0 0.5 1</ambient>
+      <diffuse>0.5 0 0.5 1</diffuse>
+      <emissive>0.5 0 0.5 1</emissive>
+      <specular>0.6 0.6 0.6 1</specular>
+      </material>
+    </visual>
+    </link>
+    <link name="Waypoint 2">
+    <visual name="b">
+      <cast_shadows>0</cast_shadows>
+      <pose>40  0 5.1 0 0 0</pose>
+      <geometry>
+      <box>
+        <size>0.1 0.1 10</size>
+      </box>
+      </geometry>
+      <material>
+      <ambient>0.5 0 0.5 1</ambient>
+      <diffuse>0.5 0 0.5 1</diffuse>
+      <emissive>0.5 0 0.5 1</emissive>
+      <specular>0.6 0.6 0.6 1</specular>
+      </material>
+    </visual>
+    </link>
+    <link name="Waypoint 3">
+    <visual name="b">
+      <cast_shadows>0</cast_shadows>
+      <pose>60  0 5.1 0 0 0</pose>
+      <geometry>
+      <box>
+        <size>0.1 0.1 10</size>
+      </box>
+      </geometry>
+      <material>
+      <ambient>0.5 0 0.5 1</ambient>
+      <diffuse>0.5 0 0.5 1</diffuse>
+      <emissive>0.5 0 0.5 1</emissive>
+      <specular>0.6 0.6 0.6 1</specular>
+      </material>
+    </visual>
+    </link>
+    <link name="Waypoint 4">
+    <visual name="b">
+      <cast_shadows>0</cast_shadows>
+      <pose>80  0 5.1 0 0 0</pose>
+      <geometry>
+      <box>
+        <size>0.1 0.1 10</size>
+      </box>
+      </geometry>
+      <material>
+      <ambient>0.5 0 0.5 1</ambient>
+      <diffuse>0.5 0 0.5 1</diffuse>
+      <emissive>0.5 0 0.5 1</emissive>
+      <specular>0.6 0.6 0.6 1</specular>
+      </material>
+    </visual>
+    </link>
+    <link name="Waypoint 5">
+    <visual name="b">
+      <cast_shadows>0</cast_shadows>
+      <pose>100  0 5.1 0 0 0</pose>
+      <geometry>
+      <box>
+        <size>0.1 0.1 10</size>
+      </box>
+      </geometry>
+      <material>
+      <ambient>0.5 0 0.5 1</ambient>
+      <diffuse>0.5 0 0.5 1</diffuse>
+      <emissive>0.5 0 0.5 1</emissive>
+      <specular>0.6 0.6 0.6 1</specular>
+      </material>
+    </visual>
+    </link>
+  </model>
+</sdf>
