@@ -17,7 +17,7 @@ class imuPublisher(Node):
         self.time_int = 1/1000
         super().__init__("imu_publisher")
         self.imu_data_pub = self.create_publisher(Dof6, "/imu/spherical_buoy/dof6",10)
-        self.imu_data_sub = self.create_subscription(Imu, "/imu/spherical_buoy", self.imu_callback, 10)
+        self.imu_data_sub = self.create_subscription(Imu, "/wamv/sensor/imu", self.imu_callback, 10)
         self.clock_data_sub = self.create_subscription(Clock, "/clock", self.clock_callback, 10)
         
         

@@ -12,8 +12,9 @@ find_package(std_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
-add_executable(talker thrust_cntrl_loop/thrust_control.cpp)
-ament_target_dependencies(talker rclcpp std_msgs)
+
+add_executable(publisher_wp waypoints/publish_waypoints.cpp)
+ament_target_dependencies(publisher_wp rclcpp std_msgs)
 
 
 if(BUILD_TESTING)
@@ -41,8 +42,9 @@ install(DIRECTORY waypoints
   DESTINATION share/${PROJECT_NAME}
 )
 
+
 install(TARGETS
-  talker
+  publisher_wp
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()

@@ -338,10 +338,58 @@
         <pose>0 0 0 3.141593 0 0</pose>
         <always_on>1</always_on>
         <update_rate>1000.0</update_rate>
+        <topic>/wamv/sensor/imu</topic>
       </sensor>
     </link>
     <joint name="imu_joint" type="revolute">
       <child>imu_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <damping>1.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="gps_link">
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.000166667</ixx>
+          <iyy>0.000166667</iyy>
+          <izz>0.000166667</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+      </visual>
+
+      <sensor name="navsat" type="navsat">
+        <always_on>1</always_on>
+        <update_rate>1000</update_rate>
+        <topic>navsat</topic>
+      </sensor>
+    </link>
+    <joint name="gps_joint" type="revolute">
+      <child>gps_link</child>
       <parent>base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
@@ -391,7 +439,7 @@
     <plugin
         filename="gz-sim-thruster-system"
         name="gz::sim::systems::Thruster">
-      <namespace>wam-v</namespace>
+      <namespace>wamv</namespace>
       <joint_name>left_propeller_joint</joint_name>
       <use_angvel_cmd>0</use_angvel_cmd>
       <fluid_density>1000</fluid_density>
@@ -407,7 +455,7 @@
     <plugin
         filename="gz-sim-thruster-system"
         name="gz::sim::systems::Thruster">
-      <namespace>wam-v</namespace>
+      <namespace>wamv</namespace>
       <joint_name>right_propeller_joint</joint_name>
       <use_angvel_cmd>0</use_angvel_cmd>
       <fluid_density>1000</fluid_density>
@@ -464,6 +512,7 @@
       <modelXYZToAirplaneXForwardZDown>0 0 0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
       <gazeboXYZToNED>0 0 0 3.141593 0 1.57079632</gazeboXYZToNED>
       <imuName>imu_sensor</imuName>
+      
 
       <!--
         SERVO1_FUNCTION 26 (GroundSteering)
@@ -515,7 +564,7 @@
         <servo_min>1000</servo_min>
         <servo_max>2000</servo_max>
         <type>COMMAND</type>
-        <cmd_topic>/model/wam-v/joint/left_propeller_joint/cmd_thrust</cmd_topic>
+        <cmd_topic>/model/wamv/joint/left_propeller_joint/cmd_thrust</cmd_topic>
       </control>
       <control channel="2">
         <jointName>right_propeller_joint</jointName>
@@ -525,7 +574,7 @@
         <servo_min>1000</servo_min>
         <servo_max>2000</servo_max>
         <type>COMMAND</type>
-        <cmd_topic>/model/wam-v/joint/right_propeller_joint/cmd_thrust</cmd_topic>
+        <cmd_topic>/model/wamv/joint/right_propeller_joint/cmd_thrust</cmd_topic>
       </control>
     </plugin>
 

@@ -17,7 +17,7 @@ class MinimalPublisher : public rclcpp::Node
     MinimalPublisher()
     : Node("minimal_publisher"), count_(0)
     {
-      publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
+      publisher_ = this->create_publisher<std_msgs::msg::String>("active_waypoint", 10);
       timer_ = this->create_wall_timer(
       500ms, std::bind(&MinimalPublisher::timer_callback, this));
     }
@@ -26,7 +26,7 @@ class MinimalPublisher : public rclcpp::Node
     void timer_callback()
     {
       auto message = std_msgs::msg::String();
-      message.data = "Hello, world! " + std::to_string(count_++);
+      message.data = "60 0 0 0 0 0";
       RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
       publisher_->publish(message);
     }

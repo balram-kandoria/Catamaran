@@ -11,14 +11,13 @@ def generate_launch_description():
         executable='parameter_bridge',
         arguments=[
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-            '/world/waves/model/spherical_buoy/link/imu_link/sensor/imu_sensor/imu@sensor_msgs/msg/Imu[gz.msgs.IMU',
+            '/wamv/sensor/imu@sensor_msgs/msg/Imu[gz.msgs.IMU',
             '/lidar/wam_v@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
             '/world/waves/model/hull/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model'
 
             ],
         output='screen',
         remappings=[
-        ("/world/waves/model/spherical_buoy/link/imu_link/sensor/imu_sensor/imu", "/imu/spherical_buoy"),
         ("/world/waves/model/hull/joint_state", "/joint_states")
         ]
     )
