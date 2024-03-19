@@ -13,12 +13,14 @@ def generate_launch_description():
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
             '/wamv/sensor/imu@sensor_msgs/msg/Imu[gz.msgs.IMU',
             '/lidar/wam_v@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
-            '/world/waves/model/hull/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model'
-
+            '/world/waves/model/hull/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
+            '/wamv/sensor/magnetometer@sensor_msgs/msg/MagneticField[gz.msgs.Magnetometer',
+            '/wamv/sensor/gps@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat'
             ],
         output='screen',
         remappings=[
-        ("/world/waves/model/hull/joint_state", "/joint_states")
+        ("/world/waves/model/hull/joint_state", "/joint_states"),
+        ('/lidar/wam_v','/wamv/sensor/lidar')
         ]
     )
 

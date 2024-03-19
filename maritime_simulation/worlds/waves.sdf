@@ -37,7 +37,7 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
 
-
+    
     <scene>
       <ambient>1.0 1.0 1.0</ambient>
       <background>0.8 0.8 0.8</background>
