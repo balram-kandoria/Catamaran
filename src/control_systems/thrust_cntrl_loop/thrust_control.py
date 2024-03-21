@@ -20,18 +20,17 @@ class ThrustController(Node):
         self.prop_sub = self.create_subscription(Imu, "/wamv/sensor/imu", self.imu_callback, 10)
         
         
-    def publish_data(self, Data: Imu):
+    def publish_data(self, thrust):
 
         thrust_command = Float64()
 
         # If x position is less than 60 then publish a thrust command to the propellers
-        if Data.orientation.x < 60:
 
-            thrust_command.data = 30.0
-            self.get_logger().info(f"Thrust Active: {Data.orientation.x}, Current Thrust: {thrust_command}")
+        thrust_command.data = float(thrust)
+        self.get_logger().info(f"Thrust Active: Current Thrust: {thrust_command}")
 
-            self.right_prop_pub.publish(thrust_command)
-            self.left_prop_pub.publish(thrust_command)
+        self.right_prop_pub.publish(thrust_command)
+        self.left_prop_pub.publish(thrust_command)
 
     def imu_callback(self, data: Imu):
         subscribedData = data
