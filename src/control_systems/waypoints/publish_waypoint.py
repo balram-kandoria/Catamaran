@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import math
 from typing import List
 import rclpy
 from rclpy.node import Node
@@ -16,7 +17,7 @@ from thrust_cntrl_loop.thrust_control import ThrustController
 
 # This class will run everytime the Imu publishes new data
 
-# Outputs: Active Waypoint, Distance to Active Waypoint, Heading to Active Waypoint
+# Outputs: Active Waypoint, Distance to Active Waypoint (Feedback to thrust controller), Heading to Active Waypoint
 # Inputs: Current GPS position
 # Parameters: Threshold to reach Waypoint
 # Overview: Provide Heading and Distance commands to controllers when Waypoint Following is engaged
@@ -42,9 +43,13 @@ class Waypoints(Node):
         self.active_waypoint_pub = self.create_publisher(Vector3, "/world/navigation/active_waypoint",10)
         self.gps_sub = self.create_subscription(NavSatFix, "/wamv/sensor/gps", self.waypoint_callback, 10)
         
-    def absoluteTolatLong(self, x, y, lattitude, longitude, heading):
+    def absoluteTolatLong(self, x, y, lattitude, longitude, heading, distance = None):
 
-        pathLength = (x**2 + y**2)**0.5
+        if distance is None:
+            pathLength = (x**2 + y**2)**0.5
+        else:
+            pathLength = distance
+
         convertedWaypoint = geopy.distance.distance(meters = pathLength).destination((lattitude, longitude), bearing = heading)
 
         return (convertedWaypoint.latitude, convertedWaypoint.longitude)
@@ -54,6 +59,24 @@ class Waypoints(Node):
         distance = geopy.distance.distance((startLat, startLong), (finishLat, finishLong)).m
 
         return distance 
+    
+    def computeBearing(self, startLat, startLong, finishLat, finishLong):
+        
+        startLat = math.radians(startLat)
+        startLong = math.radians(startLong)
+        finishLat = math.radians(finishLat)
+        finishLong = math.radians(finishLong)
+
+        x = math.sin(abs(startLong - finishLong)) * math.cos(finishLat)
+        y = (math.cos(startLat) * math.sin(finishLat)) - (math.sin(startLat) * math.cos(finishLat) * math.cos(abs(startLong - finishLong)))
+
+        bearing = (math.atan2(x,y) * (180 / math.pi))
+    
+        return bearing
+
+    def lawOfCosines(self, a, b, c):
+        gamma = math.acos((a**2 + b**2 - c**2)/(2*a*b))
+        return gamma
     
     def publish_data(self, Data: NavSatFix):
 
@@ -69,20 +92,31 @@ class Waypoints(Node):
 
     def waypoint_callback(self, data: NavSatFix):
         
+        
         destLat, destLong = self.absoluteTolatLong(x = 20, y = 0, lattitude = self.lattitude, longitude = self.longitude, heading= 90)
 
-        act_waypoint = Vector3()
+        datum_to_current_dist = self.computeDestination(data.latitude, data.longitude, self.lattitude, self.longitude)
+        datum_to_target_dist = self.computeDestination(self.lattitude, self.longitude, destLat,destLong)
+        current_to_target_dist = self.computeDestination(data.latitude,data.longitude, destLat,destLong)
 
         distance_to_waypoint = self.computeDestination(data.latitude,data.longitude, destLat,destLong)
         
+        bearing = self.computeBearing(data.latitude,data.longitude, destLat,destLong)
+        print(bearing)
+
+        lat, long = self.absoluteTolatLong(x = 20, y = 0, lattitude = data.latitude, longitude = data.longitude, heading= bearing, distance=current_to_target_dist)
+        print(destLat, destLong)
+        print(lat, long)
+
+        act_waypoint = Vector3()
         act_waypoint.x = self.lattitude
         act_waypoint.y = self.longitude
         act_waypoint.z = 0.0
 
-        if not (distance_to_waypoint < 10):
-            self.props.publish_data(30.0)
-        else:
-            self.props.publish_data(-30.0)
+        # if not (distance_to_waypoint < 10):
+        #     self.props.publish_data(30.0)
+        # else:
+        #     self.props.publish_data(-30.0)
             
 
         self.active_waypoint_pub.publish(act_waypoint)

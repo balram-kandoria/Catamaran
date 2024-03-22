@@ -27,7 +27,7 @@ class ThrustController(Node):
         # If x position is less than 60 then publish a thrust command to the propellers
 
         thrust_command.data = float(thrust)
-        self.get_logger().info(f"Thrust Active: Current Thrust: {thrust_command}")
+        # self.get_logger().info(f"Thrust Active: Current Thrust: {thrust_command}")
 
         self.right_prop_pub.publish(thrust_command)
         self.left_prop_pub.publish(thrust_command)

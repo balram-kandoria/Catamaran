@@ -2,6 +2,8 @@ import os
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
+# Publish Magnetometer Heading
+os.system("/usr/bin/python3 /home/saturn/Desktop/Dev/catamaran/src/catamaran_sensors/sensor_pipeline/heading.py")
 
 def generate_launch_description():
 
