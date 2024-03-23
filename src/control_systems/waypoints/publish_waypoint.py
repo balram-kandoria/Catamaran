@@ -67,11 +67,13 @@ class Waypoints(Node):
         finishLat = math.radians(finishLat)
         finishLong = math.radians(finishLong)
 
-        x = math.sin(abs(startLong - finishLong)) * math.cos(finishLat)
-        y = (math.cos(startLat) * math.sin(finishLat)) - (math.sin(startLat) * math.cos(finishLat) * math.cos(abs(startLong - finishLong)))
+        x = math.sin((finishLong - startLong)) * math.cos(finishLat)
+        y = (math.cos(startLat) * math.sin(finishLat)) - (math.sin(startLat) * math.cos(finishLat) * math.cos((finishLong - startLong)))
 
         bearing = (math.atan2(x,y) * (180 / math.pi))
-    
+        if bearing < 0:
+            bearing += 360
+        # angle = math.acos(math.sin(startLat)*math.sin(finishLat) + math.cos(startLat)*math.cos(finishLat)*math.cos((finishLong-startLong)))
         return bearing
 
     def lawOfCosines(self, a, b, c):
@@ -101,12 +103,14 @@ class Waypoints(Node):
 
         distance_to_waypoint = self.computeDestination(data.latitude,data.longitude, destLat,destLong)
         
-        bearing = self.computeBearing(data.latitude,data.longitude, destLat,destLong)
+        bearing = self.computeBearing(destLat,destLong,data.latitude,data.longitude)
         print(bearing)
 
+        if 
+
         lat, long = self.absoluteTolatLong(x = 20, y = 0, lattitude = data.latitude, longitude = data.longitude, heading= bearing, distance=current_to_target_dist)
-        print(destLat, destLong)
-        print(lat, long)
+        # print(destLat, destLong)
+        # print(lat, long)
 
         act_waypoint = Vector3()
         act_waypoint.x = self.lattitude
