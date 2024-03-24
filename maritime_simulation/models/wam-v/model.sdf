@@ -481,7 +481,7 @@
       name="gz::sim::systems::JointPositionController">
       <joint_name>right_engine_joint</joint_name>
       <use_velocity_commands>true</use_velocity_commands>
-      <topic>/wamv/right/rudder/joint/cmd_pos</topic>
+      <topic>/wamv/rudder/right/cmd</topic>
     </plugin>
 
     <plugin
@@ -489,7 +489,7 @@
       name="gz::sim::systems::JointPositionController">
       <joint_name>left_engine_joint</joint_name>
       <use_velocity_commands>true</use_velocity_commands>
-      <topic>/wamv/left/rudder/joint/cmd_pos</topic>
+      <topic>/wamv/rudder/left/cmd</topic>
     </plugin>
 
     <!-- Thruster plugins -->
@@ -621,7 +621,7 @@
         <servo_min>1000</servo_min>
         <servo_max>2000</servo_max>
         <type>COMMAND</type>
-        <cmd_topic>/model/wamv/joint/left_propeller_joint/cmd_thrust</cmd_topic>
+        <cmd_topic>/wamv/thrust/left_propeller/cmd</cmd_topic>
       </control>
       <control channel="2">
         <jointName>right_propeller_joint</jointName>
@@ -631,7 +631,7 @@
         <servo_min>1000</servo_min>
         <servo_max>2000</servo_max>
         <type>COMMAND</type>
-        <cmd_topic>/model/wamv/joint/right_propeller_joint/cmd_thrust</cmd_topic>
+        <cmd_topic>/wamv/thrust/right_propeller/cmd</cmd_topic>
       </control>
     </plugin>
 

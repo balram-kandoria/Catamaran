@@ -15,8 +15,8 @@ class ThrustController(Node):
         self.yaw = 0
         self.time_int = 1/1000
         super().__init__("thrust_control")
-        self.right_prop_pub = self.create_publisher(Float64, "/model/wamv/joint/right_propeller_joint/cmd_thrust",10)
-        self.left_prop_pub = self.create_publisher(Float64, "/model/wamv/joint/left_propeller_joint/cmd_thrust",10)
+        self.right_prop_pub = self.create_publisher(Float64, "/wamv/thrust/right_propeller/cmd",10)
+        self.left_prop_pub = self.create_publisher(Float64, "/wamv/thrust/left_propeller/cmd",10)
         self.prop_sub = self.create_subscription(Imu, "/wamv/sensor/imu", self.imu_callback, 10)
         
         

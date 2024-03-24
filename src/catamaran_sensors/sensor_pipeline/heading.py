@@ -49,9 +49,16 @@ class HeadingPublisher(Node):
 
             # TODO: Find Bias for specified magnetometer when real-hardware is implemented
             bias = 11.07522539720202
+            
+
 
             azimuth_degrees.data -= bias
-            self.get_logger().info(f"Publishing: Azimuth {azimuth_degrees}")
+
+            # TODO: Identify why between true 360 and 250 the azimuth is negative
+            if azimuth_degrees.data < 0:
+                azimuth_degrees.data += 360
+
+            # self.get_logger().info(f"Publishing: Azimuth {azimuth_degrees}")
             self.heading_data_pub.publish(azimuth_degrees)
 
 

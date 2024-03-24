@@ -41,6 +41,9 @@ class Waypoints(Node):
 
         super().__init__("Waypoints")
         self.active_waypoint_pub = self.create_publisher(Vector3, "/world/navigation/active_waypoint",10)
+        self.bearing_pub = self.create_publisher(Float64, "/wamv/state/bearing",10)
+        self.rotation_command_pub = self.create_publisher(Float64, "/wamv/state/rotation_command",10)
+
         self.gps_sub = self.create_subscription(NavSatFix, "/wamv/sensor/gps", self.gps_data_callback, 10)
         self.compass_sub = self.create_subscription(Float64, "/wamv/state/heading", self.heading_data_callback, 10)
 
@@ -107,7 +110,8 @@ class Waypoints(Node):
     def waypoint_callback(self):
         
         if self.gps_data is not None and self.heading_data is not None:
-        
+            
+            #TODO: Fully implement decision between data types in Waypoint json (ie absolute vs Lat/long)
             destLat, destLong = self.absoluteTolatLong(x = 20, y = 0, lattitude = self.lattitude, longitude = self.longitude, heading= 90)
 
             datum_to_current_dist = self.computeDestination(self.gps_data.latitude, self.gps_data.longitude, self.lattitude, self.longitude)
@@ -117,24 +121,30 @@ class Waypoints(Node):
             distance_to_waypoint = self.computeDestination(self.gps_data.latitude,self.gps_data.longitude, destLat,destLong)
             
             bearing = self.computeBearing(destLat,destLong,self.gps_data.latitude,self.gps_data.longitude)
-            print(bearing)
-            # print(self.heading_data.data)
+
+            phi = self.heading_data.data
 
             if bearing > 180:
-                phi = self.heading_data.data
-                theta = 180 - ((360 - bearing) + phi)
-                rotate = 180 - phi - theta
-            else:
-                phi = self.heading_data.data
-                if phi <= 90:
-                    theta = (180 - bearing) + phi
-                elif phi <= 180: 
-                    theta = (180 - phi) + phi
+                beta = 360 - bearing
+                ca_c = 180 - beta
+                if phi <= ca_c or phi > bearing:
+                    if phi <= ca_c:
+                        theta = 180 - ((beta) + phi)
+                    else: # phi > bearing
+                        theta = ca_c + (360 - phi)
                 else:
-                    theta = (180 - bearing) - phi
+                    theta = ca_c - phi
+            else:
+                alpha = 180 - bearing
+                delta = (2*bearing + alpha)
 
-
-            print(theta)
+                if phi < bearing or phi > delta:
+                    if phi < bearing:
+                        theta = -(phi + alpha)
+                    else: # phi > delta
+                        theta = delta - phi
+                else:
+                    theta = 180 - (phi - bearing)
 
             lat, long = self.absoluteTolatLong(x = 20, y = 0, lattitude = self.gps_data.latitude, longitude = self.gps_data.longitude, heading= bearing, distance=current_to_target_dist)
             # print(destLat, destLong)
@@ -150,8 +160,14 @@ class Waypoints(Node):
             # else:
             #     self.props.publish_data(-30.0)
                 
+            wam_bearing = Float64()
+            rotation = Float64()
+            wam_bearing.data = bearing
+            rotation.data = theta
 
             self.active_waypoint_pub.publish(act_waypoint)
+            self.bearing_pub.publish(wam_bearing)
+            self.rotation_command_pub.publish(rotation)
 
             
             # self.publish_data(subscribedData)
