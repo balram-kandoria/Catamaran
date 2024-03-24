@@ -120,12 +120,21 @@ class Waypoints(Node):
             print(bearing)
             # print(self.heading_data.data)
 
-            if bearing > 270:
+            if bearing > 180:
                 phi = self.heading_data.data
-                theta = 180 - (bearing - 270) - 90
+                theta = 180 - ((360 - bearing) + phi)
                 rotate = 180 - phi - theta
+            else:
+                phi = self.heading_data.data
+                if phi <= 90:
+                    theta = (180 - bearing) + phi
+                elif phi <= 180: 
+                    theta = (180 - phi) + phi
+                else:
+                    theta = (180 - bearing) - phi
 
-                print(rotate)
+
+            print(theta)
 
             lat, long = self.absoluteTolatLong(x = 20, y = 0, lattitude = self.gps_data.latitude, longitude = self.gps_data.longitude, heading= bearing, distance=current_to_target_dist)
             # print(destLat, destLong)
