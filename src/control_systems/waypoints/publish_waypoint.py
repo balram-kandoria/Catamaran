@@ -41,7 +41,11 @@ class Waypoints(Node):
 
         super().__init__("Waypoints")
         self.active_waypoint_pub = self.create_publisher(Vector3, "/world/navigation/active_waypoint",10)
-        self.gps_sub = self.create_subscription(NavSatFix, "/wamv/sensor/gps", self.waypoint_callback, 10)
+        self.gps_sub = self.create_subscription(NavSatFix, "/wamv/sensor/gps", self.gps_data_callback, 10)
+        self.compass_sub = self.create_subscription(Float64, "/wamv/state/heading", self.heading_data_callback, 10)
+
+        self.gps_data = None
+        self.heading_data = None
         
     def absoluteTolatLong(self, x, y, lattitude, longitude, heading, distance = None):
 
@@ -92,41 +96,56 @@ class Waypoints(Node):
             # self.right_prop_pub.publish(thrust_command)
             # self.left_prop_pub.publish(thrust_command)
 
-    def waypoint_callback(self, data: NavSatFix):
+    def gps_data_callback(self, data: NavSatFix):
+        self.gps_data = data
+        self.waypoint_callback()
+    
+    def heading_data_callback(self, data:Float64):
+        self.heading_data = data
+        self.waypoint_callback()
+
+    def waypoint_callback(self):
         
+        if self.gps_data is not None and self.heading_data is not None:
         
-        destLat, destLong = self.absoluteTolatLong(x = 20, y = 0, lattitude = self.lattitude, longitude = self.longitude, heading= 90)
+            destLat, destLong = self.absoluteTolatLong(x = 20, y = 0, lattitude = self.lattitude, longitude = self.longitude, heading= 90)
 
-        datum_to_current_dist = self.computeDestination(data.latitude, data.longitude, self.lattitude, self.longitude)
-        datum_to_target_dist = self.computeDestination(self.lattitude, self.longitude, destLat,destLong)
-        current_to_target_dist = self.computeDestination(data.latitude,data.longitude, destLat,destLong)
+            datum_to_current_dist = self.computeDestination(self.gps_data.latitude, self.gps_data.longitude, self.lattitude, self.longitude)
+            datum_to_target_dist = self.computeDestination(self.lattitude, self.longitude, destLat,destLong)
+            current_to_target_dist = self.computeDestination(self.gps_data.latitude,self.gps_data.longitude, destLat,destLong)
 
-        distance_to_waypoint = self.computeDestination(data.latitude,data.longitude, destLat,destLong)
-        
-        bearing = self.computeBearing(destLat,destLong,data.latitude,data.longitude)
-        print(bearing)
-
-        if 
-
-        lat, long = self.absoluteTolatLong(x = 20, y = 0, lattitude = data.latitude, longitude = data.longitude, heading= bearing, distance=current_to_target_dist)
-        # print(destLat, destLong)
-        # print(lat, long)
-
-        act_waypoint = Vector3()
-        act_waypoint.x = self.lattitude
-        act_waypoint.y = self.longitude
-        act_waypoint.z = 0.0
-
-        # if not (distance_to_waypoint < 10):
-        #     self.props.publish_data(30.0)
-        # else:
-        #     self.props.publish_data(-30.0)
+            distance_to_waypoint = self.computeDestination(self.gps_data.latitude,self.gps_data.longitude, destLat,destLong)
             
+            bearing = self.computeBearing(destLat,destLong,self.gps_data.latitude,self.gps_data.longitude)
+            print(bearing)
+            # print(self.heading_data.data)
 
-        self.active_waypoint_pub.publish(act_waypoint)
+            if bearing > 270:
+                phi = self.heading_data.data
+                theta = 180 - (bearing - 270) - 90
+                rotate = 180 - phi - theta
 
-        
-        # self.publish_data(subscribedData)
+                print(rotate)
+
+            lat, long = self.absoluteTolatLong(x = 20, y = 0, lattitude = self.gps_data.latitude, longitude = self.gps_data.longitude, heading= bearing, distance=current_to_target_dist)
+            # print(destLat, destLong)
+            # print(lat, long)
+
+            act_waypoint = Vector3()
+            act_waypoint.x = self.lattitude
+            act_waypoint.y = self.longitude
+            act_waypoint.z = 0.0
+
+            # if not (distance_to_waypoint < 10):
+            #     self.props.publish_data(30.0)
+            # else:
+            #     self.props.publish_data(-30.0)
+                
+
+            self.active_waypoint_pub.publish(act_waypoint)
+
+            
+            # self.publish_data(subscribedData)
     
 
 

@@ -109,6 +109,8 @@
       </link>
     </model>
 
+    <!-- 47.69934499969064 -122.21781553908681 -->
+
     <include>
       <uri>model://src/control_systems/waypoints/model</uri>
     </include>
