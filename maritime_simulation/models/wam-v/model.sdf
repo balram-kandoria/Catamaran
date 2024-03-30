@@ -123,9 +123,10 @@
         <limit>
           <lower>-1.570796</lower>
           <upper>1.570796</upper>
+          <effort>20.0</effort> 
         </limit>
         <dynamics>
-          <damping>0.05</damping>
+          <damping>5</damping>
         </dynamics>
       </axis>
     </joint>
@@ -174,10 +175,10 @@
         <limit>
           <lower>-1.570796</lower>
           <upper>1.570796</upper>
-          <!-- add <effort> -->
+          <effort>20.0</effort> 
         </limit>
         <dynamics>
-          <damping>0.05</damping>
+          <damping>5</damping>
         </dynamics>
       </axis>
     </joint>
@@ -465,6 +466,7 @@
     <!-- Joint state and force plugins -->
     <plugin filename="gz-sim-joint-state-publisher-system"
       name="gz::sim::systems::JointStatePublisher">
+      <topic>/wamv/state/joint_states</topic>
     </plugin>
     <!-- <plugin filename="gz-sim-apply-joint-force-system"
       name="gz::sim::systems::ApplyJointForce">
@@ -508,6 +510,7 @@
       <d_gain>0.0</d_gain> -->
       <max_thrust_cmd>2000.0</max_thrust_cmd>
       <min_thrust_cmd>-2000.0</min_thrust_cmd>
+      <cmd_topic>/wamv/thrust/left_propeller/cmd</cmd_topic>
     </plugin>
     <plugin
         filename="gz-sim-thruster-system"
@@ -524,6 +527,7 @@
       <d_gain>0.0</d_gain> -->
       <max_thrust_cmd>2000.0</max_thrust_cmd>
       <min_thrust_cmd>-2000.0</min_thrust_cmd>
+      <cmd_topic>/wamv/thrust/right_propeller/cmd</cmd_topic>
     </plugin>
 
     <!-- Hydrodynamics plugin -->

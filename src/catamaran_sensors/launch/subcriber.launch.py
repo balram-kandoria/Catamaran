@@ -17,8 +17,10 @@ def generate_launch_description():
             '/lidar/wam_v@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
             '/world/waves/model/hull/joint_state@sensor_msgs/msg/JointState[gz.msgs.Model',
             '/wamv/sensor/magnetometer@sensor_msgs/msg/MagneticField[gz.msgs.Magnetometer',
-            '/wamv/sensor/gps@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat'
+            '/wamv/sensor/gps@sensor_msgs/msg/NavSatFix[gz.msgs.NavSat',
+            '/wamv/state/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model'
             ],
+
         output='screen',
         remappings=[
         ("/world/waves/model/hull/joint_state", "/joint_states"),

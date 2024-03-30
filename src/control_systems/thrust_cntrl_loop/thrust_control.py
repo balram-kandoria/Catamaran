@@ -35,7 +35,7 @@ class ThrustController(Node):
     def imu_callback(self, data: Imu):
         subscribedData = data
 
-        self.publish_data(subscribedData)
+        self.publish_data(150)
     
 
 

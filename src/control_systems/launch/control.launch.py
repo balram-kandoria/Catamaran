@@ -13,12 +13,16 @@ def generate_launch_description():
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=[
-            "/wamv/right/rudder/joint/cmd_pos@std_msgs/msg/Float64]gz.msgs.Double",
+            "/wamv/rudder/right/cmd@std_msgs/msg/Float64]gz.msgs.Double",
             '/wamv/rudder/left/cmd@std_msgs/msg/Float64]gz.msgs.Double',
-            '/wamv/thrust/right_propeller/cmd@std_msgs/msg/Float64]gz.msgs.Double',
-            '/wamv/thrust/left_propeller/cmd@std_msgs/msg/Float64]gz.msgs.Double'
+            '/model/wamv/joint/right_propeller_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double',
+            '/model/wamv/joint/left_propeller_joint/cmd_thrust@std_msgs/msg/Float64]gz.msgs.Double'
             ],
-        output='screen'
+        output='screen',
+        remappings=[
+        ("/model/wamv/joint/right_propeller_joint/cmd_thrust", "/wamv/thrust/right_propeller/cmd"),
+        ("/model/wamv/joint/left_propeller_joint/cmd_thrust", "/wamv/thrust/left_propeller/cmd")
+        ]
     )
 
     return LaunchDescription([
