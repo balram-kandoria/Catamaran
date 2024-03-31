@@ -112,7 +112,7 @@ class Waypoints(Node):
         if self.gps_data is not None and self.heading_data is not None:
             
             #TODO: Fully implement decision between data types in Waypoint json (ie absolute vs Lat/long)
-            destLat, destLong = self.absoluteTolatLong(x = 20, y = 0, lattitude = self.lattitude, longitude = self.longitude, heading= 90)
+            destLat, destLong = self.absoluteTolatLong(x = 40, y = 0, lattitude = self.lattitude, longitude = self.longitude, heading= 90)
 
             datum_to_current_dist = self.computeDestination(self.gps_data.latitude, self.gps_data.longitude, self.lattitude, self.longitude)
             datum_to_target_dist = self.computeDestination(self.lattitude, self.longitude, destLat,destLong)
