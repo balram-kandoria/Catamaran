@@ -8,6 +8,7 @@
 /wamv/thrust/left_propeller/cmd
 
 
+gz topic -t /model/wamv/joint/left_propeller_joint/ang_vel -m gz.msgs.Double -p 'data: 1.00'
 /* This example creates a subclass of Node and uses std::bind() to register a
 * member function as a callback from the timer. */
 

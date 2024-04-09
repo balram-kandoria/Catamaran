@@ -11,7 +11,7 @@ from geometry_msgs.msg import Vector3
 from rosgraph_msgs.msg import Clock
 import geopy.distance
 # Custom Imports
-from read_json import loadJson
+# from read_json import loadJson
 sys.path.insert(0,'src/control_systems/')
 from thrust_cntrl_loop.thrust_control import ThrustController
 
@@ -36,7 +36,7 @@ class Waypoints(Node):
         self.longitude = -122.218082 # referenced /worlds/waves.sdf
         self.lattitude = 47.699345 # referenced /worlds/waves.sdf
 
-        self.waypoints = loadJson()
+        # self.waypoints = loadJson()
         self.props = ThrustController() # for testing purposes
 
         super().__init__("Waypoints")
@@ -151,8 +151,8 @@ class Waypoints(Node):
             # print(lat, long)
 
             act_waypoint = Vector3()
-            act_waypoint.x = self.lattitude
-            act_waypoint.y = self.longitude
+            act_waypoint.x = destLat
+            act_waypoint.y = destLong
             act_waypoint.z = 0.0
 
             # if not (distance_to_waypoint < 10):
